@@ -92,8 +92,9 @@ def signin(request):
             fname = user.first_name
             return redirect('home')
         else:
-            messages.error(request, "Invalid Credentials")
-            return redirect('home')
+            # messages.error(request, "Invalid Credentials")
+            msg = 'Invalid Credentials'
+            return render(request, 'signin.html', {'msg':msg})
 
     return render(request, "signin.html")
 
@@ -113,7 +114,7 @@ def check(request):
     if request.method == "POST":
         comment = request.POST.get("comment")
         if comment == '':
-            return render(request, 'check.html', {'res':"Please enter a text"})
+            return render(request, 'check.html', {'res':"The message can not be empty."})
 
         res = predict_spam(comment)[0]
         res = 'Spam' if res else 'Not Spam'

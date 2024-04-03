@@ -28,9 +28,6 @@
   <!-- Template Main CSS File -->
   <link href="{%static '/css/style.css'%}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template URL: https://bootstrapmade.com/estartup-bootstrap-landing-page-template/
-  ======================================================== -->
 </head>
 
 <body>
@@ -40,9 +37,9 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div id="logo">
-        <h1><a href="index.html"><span>Spam </span>Check</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src=" img/logo.png" alt="" title="" /></a>-->
+        <h1><a href="/"><span>Spam </span>Check</a></h1>
+        {% comment %} <!-- Uncomment below if you prefer to use an image logo -->
+        <a href="/"><img src=" {%static "img/not-spam.png"%}" alt="" title="" height=20 width=20 /></a> {% endcomment %}
       </div>
 
       {% if user.is_authenticated %}
@@ -98,34 +95,48 @@
     </section><!-- End Breadcrumbs -->
 
     <section class="inner-page pt-4">
-      {% if user.is_authenticated %}
-      <form action="check" method="post">
-          {% csrf_token %}
-          <div class="input-group tm-mb-30">
-            <textarea name="comment" id="comment" placeholder="Please enter a message to check" rows="10" cols='70' name="message" placeholder="Message"></textarea>
-          <br><br>
-          </div>
-          {% if res %}
-           {{res}}
-          {% endif %}
+      <div class="container">
+          {% if user.is_authenticated %}
+          <form action="check" method="post">
+              {% csrf_token %}
+              
+          <div class="row justify-content-center">   
+            <div class="col-md-5 col-lg-5"> 
+              <div class="input-group tm-mb-30">
+                  <textarea name="comment" id="comment" placeholder="Please enter a message to check" rows="10" cols='70' name="message" placeholder="Message"></textarea>
+                <br><br>
+              </div>
+            </div>
 
-          <div class="input-group justify-content-end">
+            <div class="col-md-8 col-lg-5">
+              <div class="input-group justify-content-center align-items-center">
+                {% if res %}
+                <b>{{res}}</b>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+        
+          <div class="input-group justify-content-center">
               <input type="submit" class="btn btn-primary tm-btn-pad-2" value="Check">
           </div>
-      </form>
-      {%else%}
-      <div class="container">
-        <p>
-          You need to login first to access this page.  
-        </p>
-      </div>
+          </form>
+          
+        {%else%}
+          <p>
+            You need to login first to access this page.  
+          </p>
+      
 
       {%endif%}
+    </div>
     </section>
 
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
+  
   <footer class="footer">
     <div class="container">
       <div class="row">
@@ -148,9 +159,6 @@
 
             <ul class="list-unstyled">
               <li><a href="#">About us</a></li>
-              <li><a href="#">Features item</a></li>
-              <li><a href="#">Live streaming</a></li>
-              <li><a href="#">Privacy Policy</a></li>
             </ul>
 
           </div>
@@ -164,7 +172,6 @@
             <ul class="list-unstyled">
               <li><a href="#">FAQ</a></li>
               <li><a href="#">Contact us</a></li>
-              <li><a href="#">Privacy Policy</a></li>
             </ul>
 
           </div>
@@ -174,7 +181,7 @@
 
     <div class="copyrights">
       <div class="container">
-        <p>&copy; Spam Check - A Spam Message Detection website. 2024  </p>
+        <p>&copy; Spam Check 2024  </p>
         </div>
       </div>
     </div>
