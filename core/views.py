@@ -31,25 +31,37 @@ def signup(request):
         pass2 = request.POST.get('pass2')
 
         if User.objects.filter(username=username):
-            messages.error(request, "Username already exists! Please try another username")
-            return redirect('home')
-        
+            # messages.error(request, "Username already exists! Please try another username")
+            # return redirect('home')
+            msg = "Username already exists! Please try another one"
+            return render(request, 'signup.html', {'msg':msg})
+                   
         
         if User.objects.filter(email=email):
-            messages.error(request, "Email already registered!")
-            return redirect('home')
+
+            msg = "Email already registered!"
+            return render(request, 'signup.html', {'msg':msg})
+
+            # messages.error(request, "Email already registered!")
+            # return redirect('home')
         
         if len(username)>10:
-            messages.error(request, "Username must be under 10 characters.")
-            
+            msg = "Username must be under 10 characters."
+            # messages.error(request, "Username must be under 10 characters.")
+            return render(request, 'signup.html', {'msg':msg})
         
         if pass1 != pass2:
-            messages.error(request, "Passwords didn't match!")
-            
+            msg = "Passwords didn't match!"
+            # messages.error(request, "Passwords didn't match!")
+            return render(request, 'signup.html', {'msg':msg})
         
         if not username.isalnum():
-            messages.error(request, "Username must be alphanumeric!")
-            return redirect('home')
+            
+            msg = "Username must be alphanumeric!"
+            return render(request, 'signup.html', {'msg':msg})
+
+            # messages.error(request, "Username must be alphanumeric!")
+            # return redirect('home')
         
 
 
@@ -60,17 +72,13 @@ def signup(request):
 
         myuser.save()
 
-        messages.success(request, "Your account has been successfully created")
-
+        msg = "Your account has been successfully created"
+        # messages.success(request, "Your account has been successfully created")
 
         # Welcome Email
 
         subject = "Spam Message Detection"
         message = "Hello" + myuser.first_name + "!! \n" +""
-
-
-
-
 
 
         return redirect('/signin')
