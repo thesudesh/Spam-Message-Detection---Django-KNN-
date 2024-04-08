@@ -12,5 +12,6 @@ urlpatterns = [
     path('signup',views.signup, name ="signup"),
     path('signin',views.signin, name ="signin"),
     path('signout',views.signout, name ="signout"),
+    path('blog', views.blog, name = "blog"),
     # path('check-spam',views.check_spam, name="check_spam"),
 ]

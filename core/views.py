@@ -20,6 +20,9 @@ from django.contrib.auth import authenticate, login, logout
 def home(request):
     return render(request, "index.html")
 
+def blog(request):
+    return render(request, "blog.html")
+
 def signup(request):
     template = 'signup.html'
     if request.method=="POST":
@@ -54,15 +57,7 @@ def signup(request):
             msg = "Passwords didn't match!"
             # messages.error(request, "Passwords didn't match!")
             return render(request, 'signup.html', {'msg':msg})
-        
-        if not username.isalnum():
-            
-            msg = "Username must be alphanumeric!"
-            return render(request, 'signup.html', {'msg':msg})
-
-            # messages.error(request, "Username must be alphanumeric!")
-            # return redirect('home')
-        
+    
 
 
         myuser = User.objects.create_user(username, email, pass1)
